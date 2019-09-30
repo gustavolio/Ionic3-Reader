@@ -35,7 +35,7 @@ export class HomePage {
 
 
   itemSelected (url: string):void {
-      let urlModal = this.modalCtrl.create("UrlModalPage", {urlParam: url});
+      let urlModal = this.modalCtrl.create("LoginPage", {urlParam: url});
       urlModal.present();
 
       urlModal.onDidDismiss(data =>{

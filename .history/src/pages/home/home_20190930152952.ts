@@ -35,11 +35,11 @@ export class HomePage {
 
 
   itemSelected (url: string):void {
-      let urlModal = this.modalCtrl.create("UrlModalPage", {urlParam: url});
+      let urlModal = this.modalCtrl.create("UrlModal", {url});
       urlModal.present();
 
       urlModal.onDidDismiss(data =>{
-        console.log(data);
-      });
+        console.log(data)
+      })
   } 
 }
