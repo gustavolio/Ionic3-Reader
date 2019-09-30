@@ -7,7 +7,10 @@
 </ion-header>
 
 <ion-content padding>
-  
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scrool-content loadingText='Loading more data...'></ion-infinite-scrool-content>
+  </ion-infinite-scroll>
+
   <ion-list>
     <ion-item *ngFor="let feed of feeds" (click)="itemSelected(feed.data.url)">
       <ion-thumbnail item-left>
@@ -17,12 +20,4 @@
       <p>{{feed.data.domain}}</p>
     </ion-item>
   </ion-list>
-
-  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-      <ion-infinite-scroll-content
-         loadingText="Loading more data...">
-      </ion-infinite-scroll-content>
-   </ion-infinite-scroll>
-
 </ion-content>
-

@@ -52,7 +52,7 @@ export class HomePage {
         if (!e.data.thumbnail || e.data.thumbnail.indexOf('b.thumbs.redditmedia.com') === -1) {
           e.data.thumbnail = 'https://www.redditstatic.com/icon.png';
         }
-      });
+      })
       infiniteScroll.complete();
     });
   }

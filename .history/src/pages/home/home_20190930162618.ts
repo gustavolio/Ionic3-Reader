@@ -12,7 +12,7 @@ export class HomePage {
 
   public feeds: Array<string>;
   private url: string = "https://www.reddit.com/new.json";
-  private olderPosts: string = "https://www.reddit.com/new.json?after=";
+  
 
   constructor(public navCtrl: NavController, public http: Http, public loadingCtrl: LoadingController, public modalCtrl: ModalController) {
 
@@ -52,7 +52,7 @@ export class HomePage {
         if (!e.data.thumbnail || e.data.thumbnail.indexOf('b.thumbs.redditmedia.com') === -1) {
           e.data.thumbnail = 'https://www.redditstatic.com/icon.png';
         }
-      });
+      })
       infiniteScroll.complete();
     });
   }
