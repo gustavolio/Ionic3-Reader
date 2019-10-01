@@ -146,11 +146,4 @@ export class HomePage {
     });
     actionSheet.present();
   }
-
-  filterItems(){
-    this.hasFilter = false;
-    this.feeds = this.noFilter.filter((item) => {
-      return item.data.title.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
-    });
-  }
 }

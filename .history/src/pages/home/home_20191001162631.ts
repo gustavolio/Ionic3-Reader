@@ -41,23 +41,15 @@ export class HomePage {
 
     loading.present();
 
-    /** Metodo de requisição */
-    // this.http.get(this.url).map(res => res.json())
-    //   .subscribe(data => {
-    //     if (data) {
-    //       this.feeds = data.data.children;
-    //       this.noFilter = this.feeds;
-    //       console.log(this.feeds);
-    //       loading.dismiss();
-    //     }
-    //   });
-
-    /** Metodo de requisição Usando Provider (RedditServiceProvider) */
-    this.redditService.fetchData(this.url).then(data => {
-      this.feeds = data;
-      this.noFilter = this.feeds;
-      loading.dismiss();
-    })
+    this.http.get(this.url).map(res => res.json())
+      .subscribe(data => {
+        if (data) {
+          this.feeds = data.data.children;
+          this.noFilter = this.feeds;
+          console.log(this.feeds);
+          loading.dismiss();
+        }
+      });
   }
 
   /* Recebe a url como paramerto e inicializa um Modal*/
@@ -145,12 +137,5 @@ export class HomePage {
       ]
     });
     actionSheet.present();
-  }
-
-  filterItems(){
-    this.hasFilter = false;
-    this.feeds = this.noFilter.filter((item) => {
-      return item.data.title.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
-    });
   }
 }

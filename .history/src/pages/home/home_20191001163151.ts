@@ -41,7 +41,6 @@ export class HomePage {
 
     loading.present();
 
-    /** Metodo de requisição */
     // this.http.get(this.url).map(res => res.json())
     //   .subscribe(data => {
     //     if (data) {
@@ -52,7 +51,6 @@ export class HomePage {
     //     }
     //   });
 
-    /** Metodo de requisição Usando Provider (RedditServiceProvider) */
     this.redditService.fetchData(this.url).then(data => {
       this.feeds = data;
       this.noFilter = this.feeds;
@@ -145,12 +143,5 @@ export class HomePage {
       ]
     });
     actionSheet.present();
-  }
-
-  filterItems(){
-    this.hasFilter = false;
-    this.feeds = this.noFilter.filter((item) => {
-      return item.data.title.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
-    });
   }
 }

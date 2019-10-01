@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { NavController, LoadingController, ModalController, ActionSheetController } from 'ionic-angular';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
-import { RedditServiceProvider } from '../../providers/reddit-service/reddit-service';
 
 @Component({
   selector: 'page-home',
@@ -22,13 +21,8 @@ export class HomePage {
   // Indica se há um filtro ativo
   public hasFilter: boolean = false;
 
-  constructor(
-    public actionSheetCtrl: ActionSheetController,
-    public navCtrl: NavController,
-    public http: Http,
-    public loadingCtrl: LoadingController,
-    public modalCtrl: ModalController,
-    public redditService: RedditServiceProvider) {
+  constructor(public actionSheetCtrl: ActionSheetController,
+    public navCtrl: NavController, public http: Http, public loadingCtrl: LoadingController, public modalCtrl: ModalController) {
     this.fetchContent();
   }
 
@@ -41,23 +35,15 @@ export class HomePage {
 
     loading.present();
 
-    /** Metodo de requisição */
-    // this.http.get(this.url).map(res => res.json())
-    //   .subscribe(data => {
-    //     if (data) {
-    //       this.feeds = data.data.children;
-    //       this.noFilter = this.feeds;
-    //       console.log(this.feeds);
-    //       loading.dismiss();
-    //     }
-    //   });
-
-    /** Metodo de requisição Usando Provider (RedditServiceProvider) */
-    this.redditService.fetchData(this.url).then(data => {
-      this.feeds = data;
-      this.noFilter = this.feeds;
-      loading.dismiss();
-    })
+    this.http.get(this.url).map(res => res.json())
+      .subscribe(data => {
+        if (data) {
+          this.feeds = data.data.children;
+          this.noFilter = this.feeds;
+          console.log(this.feeds);
+          loading.dismiss();
+        }
+      });
   }
 
   /* Recebe a url como paramerto e inicializa um Modal*/
@@ -145,12 +131,5 @@ export class HomePage {
       ]
     });
     actionSheet.present();
-  }
-
-  filterItems(){
-    this.hasFilter = false;
-    this.feeds = this.noFilter.filter((item) => {
-      return item.data.title.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
-    });
   }
 }
