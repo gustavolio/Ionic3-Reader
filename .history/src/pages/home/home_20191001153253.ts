@@ -93,35 +93,29 @@ export class HomePage {
       title: 'Filter options:',
       buttons: [
         {
-          text: 'AsK Reddit',
+          text: 'Music',
           handler: () => {
             this.feeds = this.noFilter.filter((item) => item.data.subreddit.toLowerCase() === "askreddit");
             this.hasFilter = true;
           }
         },
         {
-          text: 'Aviation',
+          text: 'Movies',
           handler: () => {
             this.feeds = this.noFilter.filter((item) => item.data.subreddit.toLowerCase() === "aviation");
             this.hasFilter = true;
           }
         },
         {
-          text: 'Memes',
-          handler: () => {
-            this.feeds = this.noFilter.filter((item) => item.data.subreddit.toLowerCase() === 'memes');
-            this.hasFilter = true;
-          }
-        },
-        {
-          text: 'Europe',
-          handler: () => {
-            this.feeds = this.noFilter.filter((item) => item.data.subreddit.toLowerCase() === 'europe');
-          }
-        },
-        {
           text: 'Cancel',
           role: 'cancel',
+          handler: () => {
+            this.feeds = this.noFilter;
+            this.hasFilter = false;
+          }
+        },
+        {
+          text: 'Movies',
           handler: () => {
             this.feeds = this.noFilter;
             this.hasFilter = false;

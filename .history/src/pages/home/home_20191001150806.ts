@@ -38,7 +38,6 @@ export class HomePage {
       .subscribe(data => {
         if (data) {
           this.feeds = data.data.children;
-          this.noFilter = this.feeds;
           console.log(this.feeds);
           loading.dismiss();
         }
@@ -93,30 +92,17 @@ export class HomePage {
       title: 'Filter options:',
       buttons: [
         {
-          text: 'AsK Reddit',
+          text: 'Music',
           handler: () => {
-            this.feeds = this.noFilter.filter((item) => item.data.subreddit.toLowerCase() === "askreddit");
+            this.feeds = this.noFilter.filter((item) => item.data.subreddit.toLowerCase() === "music");
             this.hasFilter = true;
           }
         },
         {
-          text: 'Aviation',
+          text: 'Movies',
           handler: () => {
-            this.feeds = this.noFilter.filter((item) => item.data.subreddit.toLowerCase() === "aviation");
+            this.feeds = this.noFilter.filter((item) => item.data.subreddit.toLowerCase() === "movies");
             this.hasFilter = true;
-          }
-        },
-        {
-          text: 'Memes',
-          handler: () => {
-            this.feeds = this.noFilter.filter((item) => item.data.subreddit.toLowerCase() === 'memes');
-            this.hasFilter = true;
-          }
-        },
-        {
-          text: 'Europe',
-          handler: () => {
-            this.feeds = this.noFilter.filter((item) => item.data.subreddit.toLowerCase() === 'europe');
           }
         },
         {

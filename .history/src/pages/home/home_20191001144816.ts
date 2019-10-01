@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, LoadingController, ModalController, ActionSheetController } from 'ionic-angular';
+import { NavController, LoadingController, ModalController } from 'ionic-angular';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
@@ -21,7 +21,7 @@ export class HomePage {
   // Indica se há um filtro ativo
   public hasFilter: boolean = false;
 
-  constructor(public actionSheetCtrl: ActionSheetController, public navCtrl: NavController, public http: Http, public loadingCtrl: LoadingController, public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController, public http: Http, public loadingCtrl: LoadingController, public modalCtrl: ModalController) {
     this.fetchContent();
   }
 
@@ -38,7 +38,6 @@ export class HomePage {
       .subscribe(data => {
         if (data) {
           this.feeds = data.data.children;
-          this.noFilter = this.feeds;
           console.log(this.feeds);
           loading.dismiss();
         }
@@ -87,36 +86,22 @@ export class HomePage {
     });
   }
 
-  //Mostrar Filtros
   showFilters(): void {
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Filter options:',
       buttons: [
         {
-          text: 'AsK Reddit',
+          text: 'Music',
           handler: () => {
-            this.feeds = this.noFilter.filter((item) => item.data.subreddit.toLowerCase() === "askreddit");
+            this.feeds = this.noFilter.filter((item) => item.data.subreddit.toLowerCase() === "music");
             this.hasFilter = true;
           }
         },
         {
-          text: 'Aviation',
+          text: 'Movies',
           handler: () => {
-            this.feeds = this.noFilter.filter((item) => item.data.subreddit.toLowerCase() === "aviation");
+            this.feeds = this.noFilter.filter((item) => item.data.subreddit.toLowerCase() === "movies");
             this.hasFilter = true;
-          }
-        },
-        {
-          text: 'Memes',
-          handler: () => {
-            this.feeds = this.noFilter.filter((item) => item.data.subreddit.toLowerCase() === 'memes');
-            this.hasFilter = true;
-          }
-        },
-        {
-          text: 'Europe',
-          handler: () => {
-            this.feeds = this.noFilter.filter((item) => item.data.subreddit.toLowerCase() === 'europe');
           }
         },
         {

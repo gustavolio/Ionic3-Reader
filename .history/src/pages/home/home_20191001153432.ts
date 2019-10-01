@@ -114,12 +114,6 @@ export class HomePage {
           }
         },
         {
-          text: 'Europe',
-          handler: () => {
-            this.feeds = this.noFilter.filter((item) => item.data.subreddit.toLowerCase() === 'europe');
-          }
-        },
-        {
           text: 'Cancel',
           role: 'cancel',
           handler: () => {

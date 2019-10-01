@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, LoadingController, ModalController, ActionSheetController } from 'ionic-angular';
+import { NavController, LoadingController, ModalController } from 'ionic-angular';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
@@ -16,12 +16,10 @@ export class HomePage {
   // URL's da API reddit que peda posts velhos e novos
   private olderPosts: string = "https://www.reddit.com/new.json?after=";
   private newerPosts: string = "https://www.reddit.com/new.json?before=";
-  // Guarda a versão integra di array
-  public noFilter: Array<any>;
-  // Indica se há um filtro ativo
-  public hasFilter: boolean = false;
 
-  constructor(public actionSheetCtrl: ActionSheetController, public navCtrl: NavController, public http: Http, public loadingCtrl: LoadingController, public modalCtrl: ModalController) {
+
+
+  constructor(public navCtrl: NavController, public http: Http, public loadingCtrl: LoadingController, public modalCtrl: ModalController) {
     this.fetchContent();
   }
 
@@ -38,7 +36,6 @@ export class HomePage {
       .subscribe(data => {
         if (data) {
           this.feeds = data.data.children;
-          this.noFilter = this.feeds;
           console.log(this.feeds);
           loading.dismiss();
         }
@@ -55,7 +52,6 @@ export class HomePage {
     });
   }
 
-  /** Atualiza a lista com posts mais antigos usando scroll infinito */
   doInfinite(infiniteScroll) {
     let paramsUrl = (this.feeds.length > 0) ? this.feeds[this.feeds.length - 1].data.name : "";
     this.http.get(this.olderPosts + paramsUrl).map(res => res.json()).subscribe(data => {
@@ -66,12 +62,9 @@ export class HomePage {
         }
       });
       infiniteScroll.complete();
-      this.noFilter = this.feeds;
-      this.hasFilter = false;
     });
   }
 
-  /** Atualiza a lista com posts mais recentes usando refresher */
   doRefresh(refresher) {
     let paramsUrl = this.feeds[0].data.name;
     this.http.get(this.newerPosts + paramsUrl).map(res => res.json()).subscribe(data => {
@@ -82,53 +75,6 @@ export class HomePage {
         }
       });
       refresher.complete();
-      this.noFilter = this.feeds;
-      this.hasFilter = false;
     });
-  }
-
-  //Mostrar Filtros
-  showFilters(): void {
-    let actionSheet = this.actionSheetCtrl.create({
-      title: 'Filter options:',
-      buttons: [
-        {
-          text: 'AsK Reddit',
-          handler: () => {
-            this.feeds = this.noFilter.filter((item) => item.data.subreddit.toLowerCase() === "askreddit");
-            this.hasFilter = true;
-          }
-        },
-        {
-          text: 'Aviation',
-          handler: () => {
-            this.feeds = this.noFilter.filter((item) => item.data.subreddit.toLowerCase() === "aviation");
-            this.hasFilter = true;
-          }
-        },
-        {
-          text: 'Memes',
-          handler: () => {
-            this.feeds = this.noFilter.filter((item) => item.data.subreddit.toLowerCase() === 'memes');
-            this.hasFilter = true;
-          }
-        },
-        {
-          text: 'Europe',
-          handler: () => {
-            this.feeds = this.noFilter.filter((item) => item.data.subreddit.toLowerCase() === 'europe');
-          }
-        },
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          handler: () => {
-            this.feeds = this.noFilter;
-            this.hasFilter = false;
-          }
-        }
-      ]
-    });
-    actionSheet.present();
   }
 }

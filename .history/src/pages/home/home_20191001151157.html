@@ -4,7 +4,8 @@
 
     <ion-buttons end>
       <button ion-button icon-only (click)="showFilters()">
-        <ion-icon name="funnel" [style.color]="hasFilter ? 'orange' : 'inherit'"></ion-icon> 
+        <ion-icon name="funnel"></ion-icon>
+        
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -24,7 +25,6 @@
       </ion-thumbnail>
       <h2>{{feed.data.title}}</h2>
       <p>{{feed.data.domain}}</p>
-      <p>{{feed.data.subreddit}}</p>
     </ion-item>
   </ion-list>
 
