@@ -5,7 +5,7 @@
     <ion-searchbar
       [(ngModel)]="searchTerm"
       [formControl]="searchTermControl"
-      [showCancelButton]=true
+      [showCancelButton=true]
       (ionInput)="filterItems()"
       placeholder="Type here..." >
     </ion-searchbar>

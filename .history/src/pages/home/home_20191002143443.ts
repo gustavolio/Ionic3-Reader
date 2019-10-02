@@ -29,20 +29,19 @@ export class HomePage {
   public noFilter: Array<any>;
   // Indica se há um filtro ativo
   public hasFilter: boolean = false;
-  public searchTermControl
+
   constructor(
     public actionSheetCtrl: ActionSheetController,
     public navCtrl: NavController,
     public http: Http,
     public loadingCtrl: LoadingController,
     public modalCtrl: ModalController,
-    // public redditService: RedditServiceProvider,
+    public redditService: RedditServiceProvider,
+    public searchTermControl: FormControl) {
     // public searchTermControl: FormControl) {
 
-      public redditService: RedditServiceProvider) {
-
     this.searchTermControl = new FormControl();
-    this.searchTermControl.valueChanges.debounceTime(5000).distinctUntilChanged().subscribe(search => {
+    this.searchTermControl.valueChanges.debounceTime(1000).distinctUntilChanged().subscribe(search => {
       if (search !== '' && search) {
         this.filterItems();
       }

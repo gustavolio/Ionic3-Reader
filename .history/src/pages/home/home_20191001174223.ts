@@ -1,12 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController, LoadingController, ModalController, ActionSheetController, Content } from 'ionic-angular';
 import { Http } from '@angular/http';
+import 'rxjs/add/operator/map';
 import { RedditServiceProvider } from '../../providers/reddit-service/reddit-service';
 import { FormControl } from '@angular/forms';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/distinctUntilChanged';
-
 
 @Component({
   selector: 'page-home',
@@ -29,20 +26,18 @@ export class HomePage {
   public noFilter: Array<any>;
   // Indica se há um filtro ativo
   public hasFilter: boolean = false;
-  public searchTermControl
+
   constructor(
     public actionSheetCtrl: ActionSheetController,
     public navCtrl: NavController,
     public http: Http,
     public loadingCtrl: LoadingController,
     public modalCtrl: ModalController,
-    // public redditService: RedditServiceProvider,
-    // public searchTermControl: FormControl) {
-
-      public redditService: RedditServiceProvider) {
+    public redditService: RedditServiceProvider,
+    public searchTermControl: FormControl) {
 
     this.searchTermControl = new FormControl();
-    this.searchTermControl.valueChanges.debounceTime(5000).distinctUntilChanged().subscribe(search => {
+    this.searchTermControl.valueChanges.debounceTime(1000).distinctUntilChanged().subscribe(search => {
       if (search !== '' && search) {
         this.filterItems();
       }
@@ -50,8 +45,6 @@ export class HomePage {
 
     this.fetchContent();
   }
-
-
 
   /*Requisição tipo: GET ao endpoint do Reddit
     +  Loader de feedback ao usuário.*/

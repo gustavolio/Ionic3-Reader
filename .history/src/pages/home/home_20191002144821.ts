@@ -29,7 +29,7 @@ export class HomePage {
   public noFilter: Array<any>;
   // Indica se há um filtro ativo
   public hasFilter: boolean = false;
-  public searchTermControl
+
   constructor(
     public actionSheetCtrl: ActionSheetController,
     public navCtrl: NavController,
@@ -41,8 +41,8 @@ export class HomePage {
 
       public redditService: RedditServiceProvider) {
 
-    this.searchTermControl = new FormControl();
-    this.searchTermControl.valueChanges.debounceTime(5000).distinctUntilChanged().subscribe(search => {
+    let searchTermControl = new FormControl();
+    searchTermControl.valueChanges.debounceTime(5000).distinctUntilChanged().subscribe(search => {
       if (search !== '' && search) {
         this.filterItems();
       }

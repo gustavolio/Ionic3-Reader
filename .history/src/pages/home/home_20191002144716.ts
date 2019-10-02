@@ -29,7 +29,7 @@ export class HomePage {
   public noFilter: Array<any>;
   // Indica se há um filtro ativo
   public hasFilter: boolean = false;
-  public searchTermControl
+
   constructor(
     public actionSheetCtrl: ActionSheetController,
     public navCtrl: NavController,

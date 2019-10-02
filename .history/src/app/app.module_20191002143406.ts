@@ -18,9 +18,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    HttpModule,
-    ReactiveFormsModule,
-    FormsModule
+    HttpModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

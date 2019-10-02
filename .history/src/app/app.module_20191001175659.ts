@@ -6,9 +6,9 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { HttpModule } from '@angular/http';
+import { Http, HttpModule } from '@angular/http';
 import { RedditServiceProvider } from '../providers/reddit-service/reddit-service';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormControl } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,8 +19,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HttpModule,
-    ReactiveFormsModule,
-    FormsModule
+    FormControl,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
